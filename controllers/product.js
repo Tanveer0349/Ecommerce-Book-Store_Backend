@@ -3,7 +3,6 @@ const Product = require("../models/product");
 const formidable = require("formidable");
 const fs = require("fs");
 const mongoose=require('mongoose');
-const ObjectId=mongoose.Schema.Types.ObjectId;
 
 exports.create = (req, res) => {
   let form = new formidable.IncomingForm();
@@ -169,7 +168,6 @@ exports.photo = async (req, res, next) => {
 
 exports.listSearch = async (req, res) => {
   const query = {};
-  console.log(req.query);
   if (req.query.search) {
     query.name = { $regex: req.query.search, $options: "i" };
   }
