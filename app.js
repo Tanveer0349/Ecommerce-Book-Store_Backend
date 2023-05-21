@@ -4,6 +4,8 @@ const authRouter=require('./routes/auth');
 const userRouter=require('./routes/user');
 const categoryRouter=require('./routes/category');
 const productRouter=require('./routes/product');
+const braintreeRouter=require('./routes/braintree');
+
 const cors=require('cors');
 
 const mongoose=require('mongoose');
@@ -20,6 +22,8 @@ app.use('/api',authRouter);
 app.use('/api/users',userRouter);
 app.use('/api/category',categoryRouter);
 app.use('/api/products',productRouter);
+app.use('/api/braintree',braintreeRouter);
+
 
 mongoose.connect(process.env.DB,{
     useNewUrlParser:true,

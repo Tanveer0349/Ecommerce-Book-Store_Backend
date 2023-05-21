@@ -5,7 +5,9 @@ const { userById } = require('../controllers/user');
 const router=express.Router();
 
 router.get('/search', listSearch);
+
 router.get('/:productId',read);
+router.get('/search', listSearch);
 router.get('/',getProducts);
 router.get('/related/:productId',getRelatedProducts);
 router.get('/photo/:id',photo);

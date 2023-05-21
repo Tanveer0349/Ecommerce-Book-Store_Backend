@@ -11,7 +11,6 @@ exports.create=async(req,res)=>{
         res.status(501).send(err.message);
     }
 };
-
 exports.categoryById=async(req,res)=>{
     const category=await Category.findById(req.params.id);
     if(!category) return res.status(404).send('no category found');
