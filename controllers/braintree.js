@@ -17,3 +17,24 @@ module.exports.genToken = (req, res) => {
     }
   });
 };
+
+module.exports.processPayment = (req, res) => {
+  let nonce=req.body.paymentMethodNonce;
+  let amount=req.body.amount;
+  //  Charge
+  let newTransaction=gateway.transaction.sale({
+    amount:amount,
+    paymentMethodNonce:nonce,
+    options:{
+      submitForSettlement:true
+    }
+
+  }, function (err, response) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.send(response);
+    }
+  });
+};
+
