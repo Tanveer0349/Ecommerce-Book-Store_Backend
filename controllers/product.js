@@ -2,7 +2,7 @@ const _ = require("lodash");
 const Product = require("../models/product");
 const formidable = require("formidable");
 const fs = require("fs");
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
 
 exports.create = (req, res) => {
   let form = new formidable.IncomingForm();
@@ -175,8 +175,7 @@ exports.listSearch = async (req, res) => {
     query.category = req.query.category;
   }
   try {
-    const products = await Product.find(query)
-      .select("-photo")
+    const products = await Product.find(query).select("-photo");
     if (!products) return res.status(400).send("No product found");
     res.send(products);
   } catch (err) {
@@ -184,5 +183,12 @@ exports.listSearch = async (req, res) => {
   }
 };
 
- 
-
+exports.updateQuantity = (req, res, next) => {
+  req.body.order.products.forEach(async (product) => {
+    await Product.findByIdAndUpdate(
+      { _id: product._id },
+      { $inc: { sold: product.count,quantity:-product.count }}
+    );
+  });
+  next();
+};
