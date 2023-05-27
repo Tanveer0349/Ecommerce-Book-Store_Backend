@@ -42,6 +42,7 @@ exports.read = async (req, res) => {
   res.send(product);
 };
 exports.remove = async (req, res) => {
+  console.log('route hit')
   try {
     await Product.findByIdAndRemove(req.params.productId);
     return res.status(200).send("product deleted successfully");
